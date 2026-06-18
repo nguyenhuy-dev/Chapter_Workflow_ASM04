@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="MangaWorkflow.Entities.HuyNQ/MangaWorkflow.Entities.HuyNQ.csproj" />
+  <Project Path="MangaWorkflow.Repositories.HuyNQ/MangaWorkflow.Repositories.HuyNQ.csproj" />
+  <Project Path="MangaWorkflow.Services.HuyNQ/MangaWorkflow.Services.HuyNQ.csproj" />
+  <Project Path="MangaWorkflow.SoapService.HuyNQ/MangaWorkflow.SoapService.HuyNQ.csproj" />
+</Solution>
