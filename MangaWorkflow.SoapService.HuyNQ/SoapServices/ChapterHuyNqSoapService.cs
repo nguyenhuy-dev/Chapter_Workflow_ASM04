@@ -50,9 +50,26 @@ public class ChapterHuyNqSoapService(IChapterHuyNqService chapterService) : ICha
         return new();
     }
 
-    public Task<List<ChapterHuyNq>> SearchAsync(ChapterSearchRequest request)
+    public async Task<List<ChapterHuyNq>> SearchAsync(string? title, int? chapterNumber, bool? approved)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var opt = new JsonSerializerOptions() { ReferenceHandler = ReferenceHandler.IgnoreCycles, DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull };
+
+            var items = await _chapterService.SearchAsync(new Services.HuyNQ.DTOs.Chapter.ChapterSearchRequest(title, chapterNumber, approved));
+
+            var itemsJsonString = JsonSerializer.Serialize(items, opt);
+
+            var results = JsonSerializer.Deserialize<List<ChapterHuyNq>>(itemsJsonString) ?? [];
+
+            return results;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
+
+        return [];
     }
 
     public async Task<int> CreateAsync(ChapterHuyNq request)

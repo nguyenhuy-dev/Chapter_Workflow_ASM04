@@ -1,5 +1,6 @@
 ﻿using MangaWorkflow.Services.HuyNQ.DTOs.Chapter;
 using MangaWorkflow.SoapService.HuyNQ.SoapModels;
+using System.ComponentModel;
 using System.ServiceModel;
 
 namespace MangaWorkflow.SoapService.HuyNQ.SoapServices;
@@ -15,7 +16,10 @@ public interface IChapterHuyNqSoapService
     Task<ChapterHuyNq> GetByIdAsync(int id);
 
     [OperationContract]
-    Task<List<ChapterHuyNq>> SearchAsync(ChapterSearchRequest request);
+    Task<List<ChapterHuyNq>> SearchAsync(
+        [DefaultValue(null)] string? title,
+        [DefaultValue(null)] int? chapterNumber,
+        [DefaultValue(null)] bool? approved);
 
     // Mutations
     [OperationContract]
