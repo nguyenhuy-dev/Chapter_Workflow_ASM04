@@ -92,13 +92,38 @@ public class ChapterHuyNqSoapService(IChapterHuyNqService chapterService) : ICha
         return 0;
     }
 
-    public Task<bool> DeleteAsync(int id)
+    public async Task<bool> DeleteAsync(int id)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var result = await _chapterService.DeleteAsync(id);
+
+            return result;
+        } 
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
+
+        return false;
     }
 
-    public Task<int> UpdateAsync(ChapterCreateRequest request)
+    public async Task<int> UpdateAsync(ChapterHuyNq request)
     {
-        throw new NotImplementedException();
-    }
-}
+        try
+        {
+            var opt = new JsonSerializerOptions() { ReferenceHandler = ReferenceHandler.IgnoreCycles, DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull };
+
+            var itemsJsonString = JsonSerializer.Serialize(request, opt);
+
+            var result = await _chapterService.UpdateAsync(request.HuynqId, JsonSerializer.Deserialize<ChapterUpdateRequest>(itemsJsonString) ?? new());
+
+            return result;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
+
+        return 0;
+}}

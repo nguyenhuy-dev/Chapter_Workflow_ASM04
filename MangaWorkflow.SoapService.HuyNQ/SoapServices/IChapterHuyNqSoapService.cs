@@ -26,7 +26,7 @@ public interface IChapterHuyNqSoapService
     Task<int> CreateAsync(ChapterHuyNq request);
 
     [OperationContract]
-    Task<int> UpdateAsync(ChapterCreateRequest request);
+    Task<int> UpdateAsync(ChapterHuyNq request);
 
     [OperationContract]
     Task<bool> DeleteAsync(int id);
